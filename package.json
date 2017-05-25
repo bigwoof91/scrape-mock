@@ -1,0 +1,28 @@
+{
+    "name": "18-scrape",
+    "version": "1.0.0",
+    "description": "Web scrape app with Express, Handlebars, Mongoose and cheerio",
+    "main": "index.js",
+    "scripts": {
+        "test": "nodemon server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mikelearning91/18-scrape.git"
+    },
+    "author": "Michael Wolf",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mikelearning91/18-scrape/issues"
+    },
+    "homepage": "https://github.com/mikelearning91/18-scrape#readme",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "cheerio": "^0.20.0",
+        "express": "^4.13.4",
+        "express-handlebars": "^3.0.0",
+        "mongojs": "^2.4.0",
+        "mongoose": "^4.6.0",
+        "request": "^2.69.0"
+    }
+}

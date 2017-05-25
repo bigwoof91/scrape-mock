@@ -1,0 +1,379 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 80px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #3b3b3b;
+}
+
+h2 {
+    font-family: 'Lora', sans-serif;
+    margin-top: 20px;
+    font-size: 31px;
+    text-align: left;
+    border-left: 5px solid;
+    padding-left: 10px;
+    color: #949494;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+h3 {
+    padding-left: 5%;
+    text-align: left;
+    margin-top: 20px;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: #535353;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#subscribeWSJ,
+#visitWSJ {
+    position: fixed;
+    text-align: center;
+    right: -5px;
+    top: 49px;
+    font-size: 12px;
+    font-weight: bold;
+    background: lightgreen;
+    /* border-radius: 50%; */
+    height: 45px;
+    width: 143px;
+    transform: rotate(-90deg);
+    transition: all .15s linear;
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+}
+
+#visitWSJ:hover {
+    background: #75ff75
+}
+
+#subscribeWSJ {
+    right: -49px;
+    background: #e3b6ff;
+}
+
+#subscribeWSJ:hover {
+    background: #ce7dff
+}
+
+#post {
+    opacity: 0;
+    position: absolute;
+    right: calc(5% + 1px);
+    background: lightgreen;
+    padding: 5px;
+    border-radius: 0;
+    width: 0;
+    height: 83px;
+    top: 1.5px;
+}
+
+.remove {
+    float: right;
+    font-weight: bold;
+    color: #ff6060;
+}
+
+.remove:hover {
+    color: #ff0000
+}
+
+#next {
+    position: absolute;
+    top: 25%;
+    right: 12px;
+    padding: 1px !important;
+}
+
+#next>i {
+    line-height: 2 !important;
+    font-size: 70px;
+}
+
+#next:hover {
+    background-color: transparent;
+}
+
+#prev {
+    position: absolute;
+    top: 25%;
+    left: 12px;
+    padding: 1px !important;
+}
+
+#prev>i {
+    line-height: 2 !important;
+    font-size: 70px;
+}
+
+#prev:hover {
+    background-color: transparent;
+}
+
+button:hover {
+    background-color: greenyellow;
+}
+
+input {
+    padding: 6px 8px;
+}
+
+textarea {
+    resize: none;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #202020;
+    outline: none;
+    width: 90%;
+}
+
+.textCont {
+    position: relative;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+#comment-holder>p {
+    margin-top: 7px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(227, 182, 255, 0.45)
+}
+
+#wrapper {
+    width: 1600px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.col {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.row-col {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#lifter {
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow-y: hidden;
+}
+
+#sectionOne {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+#content {
+    background: #202020;
+    color: white;
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    padding: 2% 25%;
+}
+
+#content>p {
+    text-align: left;
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.comments {
+    position: relative;
+    border: 10px solid lightgreen;
+    border-radius: 5px;
+    height: 225px;
+    margin-bottom: -25px;
+    background: white;
+    overflow: hidden;
+}
+
+.prevComments {
+    padding: 0 10px;
+    text-align: left;
+    position: relative;
+    border: 10px solid lightgreen;
+    border-radius: 5px;
+    height: 225px;
+    margin-bottom: -25px;
+    background: white;
+    overflow: auto;
+}
+
+.prevComments>h3 {
+    padding-left: 0;
+}
+
+.vertical-center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.has-tooltip {
+    position: relative;
+}
+
+.has-tooltip .tooltip {
+    pointer-events: none;
+    position: absolute;
+    z-index: 9999;
+    left: 50%;
+    top: -26px;
+    opacity: 0;
+    -moz-transition: ease-out 300ms opacity 0ms;
+    -o-transition: ease-out 300ms opacity 0ms;
+    -webkit-transition: ease-out 300ms opacity;
+    -webkit-transition-delay: 0ms;
+    transition: ease-out 300ms opacity 0ms;
+}
+
+.has-tooltip .tooltip span {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0px 8px;
+    left: -50%;
+    font-size: 14px;
+    color: #fff;
+}
+
+.has-tooltip .tooltip span:after {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-top-color: rgba(0, 0, 0, 0.6);
+    border-width: 6px;
+    left: 50%;
+    margin-left: -6px;
+}
+
+.has-tooltip:hover span {
+    opacity: 1;
+}
+
+#link {
+    margin: 100px;
+    display: block;
+    float: left;
+    line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+    h1 {
+        text-align: left;
+        font-size: 60px;
+        padding-left: 15px;
+    }
+    #subscribeWSJ,
+    #visitWSJ {
+        right: 8px;
+        top: 36px;
+        width: 117px;
+    }
+    #subscribeWSJ {
+        right: -37px;
+    }
+}
+
+
+/* Scroll Bar */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: #535353;
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #3b3b3b;
+}

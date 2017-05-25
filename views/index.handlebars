@@ -1,0 +1,46 @@
+<h1>WSJournal Recaps</h1>
+<div id="sectionOne">
+
+  <a class="articleURL has-tooltip" href="{{ this.articleURL }}" target="_blank">
+        <span class="tooltip">
+          <span>click to read this article</span>
+        </span>
+      <div id="content">
+        <h2>{{ this.title }}</h2>
+        <p>{{ this.synopsis }}</p>
+      </div>
+    </a>
+
+  <div id="buttons">
+    <button id="next" data-id="{{ this._id }}"><i class="material-icons">keyboard_arrow_right</i></button>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-xs-12 col-sm-offset-1">
+    <div id="box1">
+      <div class="comments">
+        <h3>Post Anonymous Comment:</h3>
+        <div class="textCont">
+        <textarea id="comment" type="textarea" name="comment" placeholder="Type your opinion here..." rows="4" cols="35"></textarea>
+        <button id="post" data-id="{{ this._id }}" disabled="disabled">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-4 col-xs-12 col-sm-offset-2">
+    <div id="box2">
+      <div class="prevComments">
+        <h3>Anonymous Comments:</h3>
+        <div id="comment-holder">
+          {{#each this.comments as |value key|}}
+          <p><span class="number">{{ addOne key }}</span> {{ value.text }} <a href="#" class="remove" data-id="{{ value._id }}"
+              target="_blank">X</a></p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
