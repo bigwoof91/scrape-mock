@@ -12,6 +12,18 @@ $(document).on('click', '#next', function () {
 	$.get(baseURL + "/next/" + id, buttons);
 });
 
+$(document).on('click', '#deleteArticle', function () {
+
+	var removeArticle = $(this).attr('data-id');
+	$.ajax({
+		url: "/remove/article/" + removeArticle,
+		type: 'DELETE',
+		success: function (result) {
+			console.log(removeArticle + 'deleted');
+		}
+	});
+});
+
 // Listen for prev button
 $(document).on('click', '#prev', function () {
 	// Get id from button
@@ -31,27 +43,27 @@ function buttons(res) {
 	}
 	else {
 
-	$('#content>h2').text(res[0].title);
-	$('#content>p').text(res[0].synopsis);
-	$('a.articleURL').attr('href', res[0].articleURL);
-	// Update comments
-	comments(res[0].comments);
-	// Check if previous button exists
-	$buttons = $('#buttons');
-	if ($buttons.children().length === 1) {
-		// Add button
-		var $but = $('<button>').html('<i class="material-icons">keyboard_arrow_left</i>').attr('id', 'prev').attr('data-id', res[0]._id);
-		$buttons.prepend($but);
-	} else {
-		// Check if the new id is the first id
-		if (res[0]._id === localStorage.getItem('first')) {
-			// If so remove
-			$('#prev').remove();
+		$('#content>h2').text(res[0].title);
+		$('#content>p').text(res[0].synopsis);
+		$('a.articleURL').attr('href', res[0].articleURL);
+		// Update comments
+		comments(res[0].comments);
+		// Check if previous button exists
+		$buttons = $('#buttons');
+		if ($buttons.children().length === 1) {
+			// Add button
+			var $but = $('<button>').html('<i class="material-icons">keyboard_arrow_left</i>').attr('id', 'prev').attr('data-id', res[0]._id);
+			$buttons.prepend($but);
 		} else {
-			// Just update prev button id
-			$('#prev').attr('data-id', res[0]._id);
+			// Check if the new id is the first id
+			if (res[0]._id === localStorage.getItem('first')) {
+				// If so remove
+				$('#prev').remove();
+			} else {
+				// Just update prev button id
+				$('#prev').attr('data-id', res[0]._id);
+			}
 		}
-	}
 	}
 	// Update next and post button id
 	$('#next').attr('data-id', res[0]._id);
@@ -99,23 +111,23 @@ $(document).on('click', '.remove', function () {
 });
 
 
-$(document).ready( function() {
+$(document).ready(function () {
 	var $postArea = $('#comment');
 	var $postBut = $('#post');
-    $postArea.on("focus", function( e ) {
+	$postArea.on("focus", function (e) {
 		// show & enable post button upon textarea focus
-	    $postBut
-		.animate({ 
-			width: '45px',
-			opacity: '1'
-			 }, 'fast')
-		.removeAttr('disabled');
-    });
+		$postBut
+			.animate({
+				width: '45px',
+				opacity: '1'
+			}, 'fast')
+			.removeAttr('disabled');
+	});
 	// hide post button upon unfocusing textarea
-    $postArea.on("blur", function( e ) {
+	$postArea.on("blur", function (e) {
 		// allow 100ms for post button to work before it is disabled
-        setTimeout(function() {
+		setTimeout(function () {
 			$postBut.animate({ width: '0', opacity: '0' }, 'fast').attr('disabled', 'disabled');
 		}, 100);
-    });
+	});
 });

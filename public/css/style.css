@@ -63,7 +63,7 @@ button {
     cursor: pointer;
 }
 
-#subscribeWSJ,
+#deleteArticle,
 #visitWSJ {
     position: fixed;
     text-align: center;
@@ -81,16 +81,20 @@ button {
     -moz-transition: all .15s linear;
 }
 
+#visitWSJ {
+    line-height: 1.3;
+}
+
 #visitWSJ:hover {
     background: #75ff75
 }
 
-#subscribeWSJ {
+#deleteArticle {
     right: -49px;
     background: #e3b6ff;
 }
 
-#subscribeWSJ:hover {
+#deleteArticle:hover {
     background: #ce7dff
 }
 
@@ -337,13 +341,13 @@ a:hover {
         font-size: 60px;
         padding-left: 15px;
     }
-    #subscribeWSJ,
+    #deleteArticle,
     #visitWSJ {
         right: 8px;
         top: 36px;
         width: 117px;
     }
-    #subscribeWSJ {
+    #deleteArticle {
         right: -37px;
     }
 }

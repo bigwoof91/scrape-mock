@@ -1,7 +1,6 @@
 // Dependencies
 var path = require('path');
 var bodyParser = require('body-parser');
-
 // Initialize Express app
 var express = require('express');
 var app = express();
@@ -42,72 +41,43 @@ db.on('error', function (err) {
 // Require our scrapedData and comment models
 var ScrapedData = require('./models/scraped');
 
-// Scrape data when app starts
-var options = {
-    url: 'https://www.wsj.com/',
-    headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13'
-    }
-};
-// Make a request for the news section of wsj.com
-request(options, function (error, response, html) {
-    // Load the html body from request into cheerio
-    var $ = cheerio.load(html);
-    // For each element with a "new-content-block" class
-    $('div.wsj-card').each(function (i, element) {
-
-        // Save the title text
-        var title = $(element).children('h3.wsj-headline').text();
-        // Save the article url
-        var articleURL = $(element).children().children("a.wsj-headline-link").attr("href");
-        // Save the synopsis text
-        var synopsis = $(element).children('div.wsj-card-body').children('p.wsj-summary').children('span').text();
-        // fill in synopsis data if no synopsis is scraped
-        if (synopsis === '' || synopsis === null) {
-            synopsis = 'There is no synopsis for this article. Click to read the full article.';
-        }
-
-        // Create mongoose model
-        var scrapedData = new ScrapedData({
-            title: title,
-            synopsis: synopsis,
-            articleURL: articleURL
-        });
-
-        // Save data
-        scrapedData.save(function (err) {
-            if (err) {
-                console.log(err);
-            }
-            console.log('Saved');
-        });
-    });
-});
-
 // Express middleware
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static('public'));
 
+
+// ============================================ //
+// ================== ROUTES ================== //
+// ============================================ //
+
+
+// Require Customized Cheerio Scraper Module
+var scrape = require('./modules/cheerio.js');
+app.get('/scrape-recent', scrape.cheerio);
+
 // Main route
 app.get('/', function (req, res) {
     ScrapedData
         .findOne()
         .exec(function (err, data) {
-            if (err) return console.error(err);
-            // If successful render first data
-            res.render('index', {
-                title: data.title,
-                synopsis: data.synopsis,
-                _id: data._id,
-                articleURL: data.articleURL,
-                comments: data.comments
-            });
-
+            if (err) {
+                return console.error(err);
+            }
+            if (data === null) {
+                res.redirect('/scrape-recent');
+            }
+            else {
+                res.render('index', {
+                    title: data.title,
+                    synopsis: data.synopsis,
+                    _id: data._id,
+                    articleURL: data.articleURL,
+                    comments: data.comments
+                });
+            }
         });
-ScrapedData.remove({synopsis: ""});
-ScrapedData.remove({synopsis: null});
 
 });
 
@@ -122,7 +92,7 @@ app.get('/next/:id', function (req, res) {
         .exec(function (err, data) {
             if (err) return console.error(err);
             res.json(data);
-        })
+        });
 });
 
 // Retrieve 'prev' data from the db
@@ -173,6 +143,16 @@ app.post('/remove/:id', function (req, res) {
             res.json(data.comments);
         }
     );
+});
+
+// Remove comment data from the db
+app.delete('/remove/article/:id', function (req, res) {
+    // Update scraped data and remove comment
+    ScrapedData.remove({ _id: req.params.id },
+        function (err, data) {
+            if (err) return console.error(err);
+            res.render('index', data);
+        });
 });
 
 // Listen on port 3001
