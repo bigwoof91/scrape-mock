@@ -42,12 +42,14 @@ exports.cheerio = function (req, res) {
             // Save the synopsis text
             var synopsis = $(element).children('div.wsj-card-body').children('p.wsj-summary').children('span').text();
 
+            if (synopsis !== "" && title !== "" && articleURL !== "") {
             // Create mongoose model
             var scrapedData = new ScrapedData({
                 title: title,
                 synopsis: synopsis,
                 articleURL: articleURL
             });
+            
 
             // Save data
             scrapedData
@@ -57,7 +59,7 @@ exports.cheerio = function (req, res) {
                     }
                     console.log('Saved');
                 });
-
+            }
             // ScrapedData.findOne()
             //     .exec(function (err, data) {
             //         if (err) return console.error(err);

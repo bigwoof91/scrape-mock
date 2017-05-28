@@ -59,6 +59,10 @@ app.get('/scrape-recent', scrape.cheerio);
 
 // Main route
 app.get('/', function (req, res) {
+    ScrapedData.remove({ synopsis: "" });
+    ScrapedData.remove({ synopsis: null });
+    ScrapedData.remove({ synopsis: " " });
+
     ScrapedData
         .findOne()
         .exec(function (err, data) {
