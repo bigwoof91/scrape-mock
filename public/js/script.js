@@ -2,7 +2,7 @@
 var baseURL = window.location.origin;
 // Save first id to local storage
 $(function() {
-    localStorage.setItem('first', $('#next').attr('data-id'));
+    $.get(baseURL + '/first', storeFirstItem);
 });
 
 // Listen for next button
@@ -30,22 +30,19 @@ $(document).on('click', '#deleteArticle', function() {
         url: "/remove/article/" + removeArticleID,
         type: 'DELETE',
         success: function(result) {
-            console.log(removeArticleID + 'deleted');
+            // console.log(removeArticleID + 'deleted');
 
-            $.get(baseURL + "/next/" + removeArticleID, deleteButton).then(function() {
-                if ($('#next').attr('data-id') === localStorage.getItem('first')) {
-                    $('#prev').remove();
-                } else {
-                    // Just update prev button id
-                    $('#prev').attr('data-id', res[0]._id);
-                }
-            });
-
-
+            $.get(baseURL + "/next/" + removeArticleID, deleteButton);
+            // Check for new first document and store in Local Storage
+            $.get(baseURL + '/first', storeFirstItem);
+            // Check if current article is first in the collection
+            $.get(baseURL + '/first', checkFirstDocument);
 
         }
     });
 });
+
+
 
 function deleteButton(res) {
 
@@ -63,23 +60,23 @@ function deleteButton(res) {
         // Check if previous button exists
         $buttons = $('#buttons');
 
-        // Update next and post button id
-        $('#next').attr('data-id', res[0]._id);
-        $('#post').attr('data-id', res[0]._id);
+
         // Check to see if there is an actual "previous" article Mongo
         if ($buttons.children().length === 1) {
-            localStorage.clear();
-            localStorage.setItem('first', $('#next').attr('data-id'));
+
             // Add button
             var $but = $('<button>').html('<i class="material-icons">keyboard_arrow_left</i>').attr('id', 'prev').attr('data-id', res[0]._id);
             $buttons.prepend($but);
         } else {
-            localStorage.clear();
-            localStorage.setItem('first', $('#next').attr('data-id'));
             // Just update prev button id
             $('#prev').attr('data-id', res[0]._id);
         }
+        // Update next and post button id
+        $('#prev').attr('data-id', res[0]._id);
+        $('#next').attr('data-id', res[0]._id);
+        $('#post').attr('data-id', res[0]._id);
     }
+
 }
 
 
@@ -104,6 +101,7 @@ function buttons(res) {
         } else {
             // Check if the new id is the first id
             if (res[0]._id === localStorage.getItem('first')) {
+
                 // If so remove
                 $('#prev').remove();
             } else {
@@ -111,10 +109,12 @@ function buttons(res) {
                 $('#prev').attr('data-id', res[0]._id);
             }
         }
+        console.log(res[0]);
+        // Update next and post button id
+        $('#next').attr('data-id', res[0]._id);
+        $('#post').attr('data-id', res[0]._id);
     }
-    // Update next and post button id
-    $('#next').attr('data-id', res[0]._id);
-    $('#post').attr('data-id', res[0]._id);
+
 }
 
 function comments(obj) {
@@ -125,6 +125,24 @@ function comments(obj) {
         $commentHolder.append($p);
     }
     $('#box2>div.prevComments').append($commentHolder);
+}
+
+// Function to check for first document in collection
+function checkFirstDocument(res) {
+
+    if (localStorage.getItem('first') === $('#next').attr('data-id')) {
+        console.log(res["0"]._id);
+        // Remove prev button
+        $('#prev').remove();
+    } else {
+        var newPrevID = $('#next').attr('data-id');
+        $('#prev').attr('data-id', newPrevID);
+
+    }
+}
+
+function storeFirstItem(res) {
+    localStorage.setItem('first', res[0]._id);
 }
 
 // Listen for post button
@@ -175,6 +193,6 @@ $(document).ready(function() {
         // allow 100ms for post button to actually "post" data before it is disabled
         setTimeout(function() {
             $postBut.animate({ width: '0', opacity: '0' }, 'fast').attr('disabled', 'disabled');
-        }, 100);
+        }, 200);
     });
 });

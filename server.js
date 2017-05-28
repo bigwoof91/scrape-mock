@@ -59,9 +59,6 @@ app.get('/scrape-recent', scrape.cheerio);
 
 // Main route
 app.get('/', function (req, res) {
-    ScrapedData.remove({ synopsis: "" });
-    ScrapedData.remove({ synopsis: null });
-    ScrapedData.remove({ synopsis: " " });
 
     ScrapedData
         .findOne()
@@ -83,6 +80,14 @@ app.get('/', function (req, res) {
             }
         });
 
+});
+
+// Find first document in collection
+app.get('/first', function(req, res) {
+    ScrapedData.find().sort({ _id: 1}).limit(1).exec(function(err, data) {
+        if (err) return console.error(err);
+        res.json(data);
+    })
 });
 
 // Retrieve 'next' data from the db
@@ -110,7 +115,7 @@ app.get('/prev/:id', function (req, res) {
         .exec(function (err, data) {
             if (err) return console.error(err);
             res.json(data);
-        })
+        });
 });
 
 // Add comment data to the db
