@@ -53,7 +53,7 @@ app.use(express.static('public'));
 // ============================================ //
 
 
-// Require Customized Cheerio Scraper Module
+// Scrape for most recent articles on WSJ
 var scrape = require('./modules/cheerio.js');
 app.get('/scrape-recent', scrape.cheerio);
 
@@ -88,6 +88,14 @@ app.get('/first', function(req, res) {
         if (err) return console.error(err);
         res.json(data);
     })
+});
+
+// Find last document in collection
+app.get('/last', function(req, res) {
+    ScrapedData.find().sort({ _id: -1}).limit(1).exec(function(err, data) {
+        if (err) return console.error(err);
+        res.json(data);
+    });
 });
 
 // Retrieve 'next' data from the db

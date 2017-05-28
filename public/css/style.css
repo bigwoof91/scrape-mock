@@ -3,6 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
     width: 100%;
+    margin: 0 auto;
 }
 
 html {
@@ -17,8 +18,8 @@ img {
 
 h1 {
     text-align: center;
-    font-weight: bold;
-    font-size: 80px;
+    /*font-weight: bold;*/
+    font-size: 50px;
     margin-top: 20px;
     margin-bottom: 30px;
     color: #3b3b3b;
@@ -64,38 +65,53 @@ button {
 }
 
 #deleteArticle,
-#visitWSJ {
-    position: fixed;
+#scrapeWSJ {
+    position: relative;
     text-align: center;
-    right: -5px;
-    top: 49px;
-    font-size: 12px;
+    /*right: -5px;*/
+    top: 0;
+    font-size: 22px;
     font-weight: bold;
     background: lightgreen;
     /* border-radius: 50%; */
     height: 45px;
-    width: 143px;
-    transform: rotate(-90deg);
+    width: 100%;
+    /*transform: rotate(-90deg);*/
     transition: all .15s linear;
     -webkit-transition: all .15s linear;
     -moz-transition: all .15s linear;
 }
 
-#visitWSJ {
+#deleteArticle,
+#scrapeWSJ {
     line-height: 1.3;
+    color: #3b3b3b;
 }
 
-#visitWSJ:hover {
+#deleteArticle:hover,
+#scrapeWSJ:hover {
+    color: black;
     background: #75ff75
 }
 
+#scrapeWSJ>a {
+    color: #3b3b3b;
+}
+
+#scrapeWSJ>a:hover {
+    color: #3b3b3b;
+}
+
 #deleteArticle {
-    right: -49px;
-    background: #e3b6ff;
+    left: 0;
+    background: lightcoral;
+    position: relative;
+    transform: none;
+    top: 0;
 }
 
 #deleteArticle:hover {
-    background: #ce7dff
+    background: #f05757
 }
 
 #post {
@@ -223,7 +239,6 @@ a:hover {
     width: 100%;
     height: 300px;
     margin: 0 auto;
-    margin-bottom: 60px;
     text-align: center;
 }
 
@@ -341,15 +356,6 @@ a:hover {
         font-size: 60px;
         padding-left: 15px;
     }
-    #deleteArticle,
-    #visitWSJ {
-        right: 8px;
-        top: 36px;
-        width: 117px;
-    }
-    #deleteArticle {
-        right: -37px;
-    }
 }
 
 
@@ -380,4 +386,27 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:window-inactive {
     background: #3b3b3b;
+}
+
+.row {
+    margin-top: 20px;
+    height: 250px;
+}
+
+.col-sm-6 {
+    padding: 0;
+    height: 100%;
+}
+
+.comments,
+.prevComments,
+#box1,
+#box2 {
+    height: 100%;
+    border-radius: 0;
+}
+
+.comments,
+.prevComments {
+    border: 30px solid lightgreen;
 }

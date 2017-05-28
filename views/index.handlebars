@@ -1,6 +1,19 @@
-<button id="deleteArticle" data-id="{{this._id}}">Delete <br>Article</button> 
+<div id="modal-container">
+  <div class="modal-background">
+    <div class="modal">
+      <h3 class="modal-h">I'm a Modal</h3>
+      <p class="modal-b"></p>
+      <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+        <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+      </svg>
+    </div>
+  </div>
+</div>
 
-<h1>WSJournal Recaps</h1>
+<h1>Wall Street Journal Recaps</h1>
+<button id="scrapeWSJ"><a href="/scrape-recent">Scrape New Articles</a></button>
+
+
 <div id="sectionOne">
 
   <a class="articleURL has-tooltip" href="{{ this.articleURL }}" target="_blank">
@@ -19,21 +32,21 @@
   </div>
 
 </div>
-
+<button id="deleteArticle" data-id="{{this._id}}">Delete This Article</button>
 <div class="row">
-  <div class="col-sm-4 col-xs-12 col-sm-offset-1">
+  <div class="col-sm-6 col-xs-12">
     <div id="box1">
       <div class="comments">
         <h3>Post Anonymous Comment:</h3>
         <div class="textCont">
-        <textarea id="comment" type="textarea" name="comment" placeholder="Type your opinion here..." rows="4" cols="35"></textarea>
-        <button id="post" data-id="{{ this._id }}" disabled="disabled">Post</button>
+          <textarea id="comment" type="textarea" name="comment" placeholder="Type your opinion here..." rows="4" cols="35"></textarea>
+          <button id="post" data-id="{{ this._id }}" disabled="disabled">Post</button>
         </div>
       </div>
     </div>
   </div>
-  
-  <div class="col-sm-4 col-xs-12 col-sm-offset-2">
+
+  <div class="col-sm-6 col-xs-12">
     <div id="box2">
       <div class="prevComments">
         <h3>Anonymous Comments:</h3>

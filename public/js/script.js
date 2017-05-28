@@ -1,8 +1,17 @@
 // Grab the URL of the website
 var baseURL = window.location.origin;
+var modal = $('#modal-container');
+var modalHeader = $('.modal-h');
+var modalBody = $('.modal-b');
+
 // Save first id to local storage
 $(function() {
     $.get(baseURL + '/first', storeFirstItem);
+
+    if ($('#comment-holder').children().length <= 1) {
+        var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
+        $('#comment-holder').append(noCommentDiv);
+    }
 });
 
 // Listen for next button
@@ -11,6 +20,17 @@ $(document).on('click', '#next', function() {
     var id = $(this).attr('data-id');
     // Get next articles
     $.get(baseURL + "/next/" + id, buttons);
+
+    // On last article in collection, hide next arrow
+    $.get(baseURL + "/last", function(newLast) {
+        storeLast = newLast[0]._id;
+        console.log(storeLast);
+    }).then(function(res2) {
+        if ($('#next').attr('data-id') === storeLast) {
+            console.log("no more articles");
+            $('#next').hide();
+        }
+    });
 });
 
 // Listen for prev button
@@ -24,6 +44,7 @@ $(document).on('click', '#prev', function() {
     }
 });
 
+// Logic on 'article delete'
 $(document).on('click', '#deleteArticle', function() {
     var removeArticleID = $('#next').attr('data-id');
     $.ajax({
@@ -34,32 +55,53 @@ $(document).on('click', '#deleteArticle', function() {
 
             $.get(baseURL + "/next/" + removeArticleID, deleteButton);
             // Check for new first document and store in Local Storage
-            $.get(baseURL + '/first', storeFirstItem);
+            $.get(baseURL + '/first', function(res) {
+                if (res[0] !== undefined) {
+                    storeFirstItem(res);
+                    console.log('notttt');
+                } else {
+                    console.log('yessss');
+
+                    activateScrapeMoreModal();
+                    $('#modal-container').click(function() {
+                        $(this).addClass('out');
+                        $('body').removeClass('modal-active');
+                        $.get(baseURL + '/scrape-recent', function() {
+                            location.reload();
+                        });
+                    });
+                }
+            });
             // Check if current article is first in the collection
             $.get(baseURL + '/first', checkFirstDocument);
-
         }
     });
 });
 
-
-
 function deleteButton(res) {
-
+    // If last article in collection was just deleted
     if (res[0] === undefined) {
         console.log("no more articles");
         $('#next').hide();
-
+        var newLastArticle;
+        // Find new 'last article' in collection
+        $.get(baseURL + "/last", buttons);
     } else {
-
+        // If the 'last article' in the collection wasn't just deleted
+        // Display 'next' article after delete
         $('#content>h2').text(res[0].title);
         $('#content>p').text(res[0].synopsis);
         $('a.articleURL').attr('href', res[0].articleURL);
         // Update comments
         comments(res[0].comments);
+        $('.no-comm').remove();
+        if ($('#comment-holder').children().length === 1) {
+            var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
+            $('#comment-holder').append(noCommentDiv);
+        }
+
         // Check if previous button exists
         $buttons = $('#buttons');
-
 
         // Check to see if there is an actual "previous" article Mongo
         if ($buttons.children().length === 1) {
@@ -76,15 +118,16 @@ function deleteButton(res) {
         $('#next').attr('data-id', res[0]._id);
         $('#post').attr('data-id', res[0]._id);
     }
-
 }
 
 
 function buttons(res) {
+
     // Update content
     if (res[0] === undefined) {
         console.log("no more articles");
         $('#next').hide();
+
     } else {
 
         $('#content>h2').text(res[0].title);
@@ -92,6 +135,12 @@ function buttons(res) {
         $('a.articleURL').attr('href', res[0].articleURL);
         // Update comments
         comments(res[0].comments);
+
+        $('.no-comm').remove();
+        if ($('#comment-holder').children().length <= 1 && $('#comment-holder').children().children().length === 0) {
+            var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
+            $('#comment-holder').append(noCommentDiv);
+        }
         // Check if previous button exists
         $buttons = $('#buttons');
         if ($buttons.children().length === 1) {
@@ -114,7 +163,6 @@ function buttons(res) {
         $('#next').attr('data-id', res[0]._id);
         $('#post').attr('data-id', res[0]._id);
     }
-
 }
 
 function comments(obj) {
@@ -141,8 +189,16 @@ function checkFirstDocument(res) {
     }
 }
 
+
 function storeFirstItem(res) {
     localStorage.setItem('first', res[0]._id);
+}
+
+function activateScrapeMoreModal() {
+    $(modal).removeAttr('class').addClass('seven');
+    $('body').addClass('modal-active');
+    $(modalHeader).html('No more articles');
+    $(modalBody).html("Click anywhere to scrape today's articles");
 }
 
 // Listen for post button
@@ -171,8 +227,13 @@ $(document).on('click', '.remove', function() {
     $.post(baseURL + "/remove/" + id, { id: removeID }, function(res) {
         // Update comments
         comments(res);
+        if ($('#comment-holder').children().length <= 1) {
+            var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
+            $('#comment-holder').append(noCommentDiv);
+        }
+
     });
-    return false;
+
 });
 
 // Post Button Behavior
