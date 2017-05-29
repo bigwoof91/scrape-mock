@@ -3,6 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
 }
 
@@ -17,11 +18,10 @@ img {
 }
 
 h1 {
+    float: left;
     text-align: center;
-    /*font-weight: bold;*/
     font-size: 50px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin: 20px 0 30px 17px;
     color: #3b3b3b;
 }
 
@@ -82,9 +82,20 @@ button {
     -moz-transition: all .15s linear;
 }
 
+#scrapeWSJ {
+    border-radius: 3px;
+    padding: 10px 0 15px 0;
+    width: 150px;
+    float: right;
+    top: 17px;
+    height: 55px;
+    font-size: 16px;
+    right: 17px;
+}
+
 #deleteArticle,
 #scrapeWSJ {
-    line-height: 1.3;
+    line-height: 1.2;
     color: #3b3b3b;
 }
 
@@ -233,11 +244,16 @@ a:hover {
     overflow-y: hidden;
 }
 
+.header {
+    height: 10%;
+}
+
 #sectionOne {
     display: block;
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 40%;
+    /*height: 300px;*/
     margin: 0 auto;
     text-align: center;
 }
@@ -263,7 +279,6 @@ a:hover {
 
 .comments {
     position: relative;
-    border: 10px solid lightgreen;
     border-radius: 5px;
     height: 225px;
     margin-bottom: -25px;
@@ -275,7 +290,6 @@ a:hover {
     padding: 0 10px;
     text-align: left;
     position: relative;
-    border: 10px solid lightgreen;
     border-radius: 5px;
     height: 225px;
     margin-bottom: -25px;
@@ -302,8 +316,8 @@ a:hover {
     pointer-events: none;
     position: absolute;
     z-index: 9999;
-    left: 50%;
-    top: -26px;
+    right: 145px;
+    top: -5px;
     opacity: 0;
     -moz-transition: ease-out 300ms opacity 0ms;
     -o-transition: ease-out 300ms opacity 0ms;
@@ -389,8 +403,9 @@ a:hover {
 }
 
 .row {
-    margin-top: 20px;
-    height: 250px;
+    /*margin-top: 20px;
+    height: 250px;*/
+    height: calc(50% - 46px);
 }
 
 .col-sm-6 {
@@ -403,10 +418,12 @@ a:hover {
 #box1,
 #box2 {
     height: 100%;
+    border: 15px solid lightgreen;
     border-radius: 0;
 }
 
-.comments,
+
+/*.comments,
 .prevComments {
     border: 30px solid lightgreen;
-}
+}*/

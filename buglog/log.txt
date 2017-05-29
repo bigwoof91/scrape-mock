@@ -1,1 +1,1 @@
--- Deleting last document on slider = BUG!
+-- Deleting last document on slider - BUG! == FIXED
