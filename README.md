@@ -14,8 +14,7 @@ or
 nodemon server
 ```
 
-## Mocs
-Design mockups
+## Design mockups
 --------------------------------------------------------------
 ![Mock Up 1](/public/img/mock_1.png?raw=true "Optional Title")
 --------------------------------------------------------------
