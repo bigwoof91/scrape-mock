@@ -14,6 +14,17 @@ $(function() {
     }
 });
 
+$(document).on('click', '#scrapeWSJ', function() {
+    var scrapedDiv = '<h1 class="scraped-message">scraping recent articles</h1>';
+    $('.modal, .modal-svg, .model-h, .modal-b').hide();
+    $(modal).removeAttr('class').addClass('seven');
+    $('body').append(scrapedDiv);
+    $('body').addClass('modal-active');
+    $('#modal-container').addClass('out');
+
+    window.location.href = "/scrape-recent"
+});
+
 // Listen for next button
 $(document).on('click', '#next', function() {
     // Get id from button
@@ -189,11 +200,12 @@ function checkFirstDocument(res) {
     }
 }
 
-
+// Store first item in Mongo to localstorage
 function storeFirstItem(res) {
     localStorage.setItem('first', res[0]._id);
 }
 
+// Activate Scrape Revent ArticleseModal
 function activateScrapeMoreModal() {
     $(modal).removeAttr('class').addClass('seven');
     $('body').addClass('modal-active');
