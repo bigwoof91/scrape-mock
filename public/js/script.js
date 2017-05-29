@@ -14,6 +14,7 @@ $(function() {
     }
 });
 
+// Functionality for 'Scrape New Articles' button
 $(document).on('click', '#scrapeWSJ', function() {
     var scrapedDiv = '<h1 class="scraped-message">scraping recent articles</h1>';
     $('.modal, .modal-svg, .model-h, .modal-b').hide();
