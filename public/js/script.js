@@ -8,7 +8,7 @@ var modalBody = $('.modal-b');
 $(function() {
     $.get(baseURL + '/first', storeFirstItem);
 
-    if ($('#comment-holder').children().length <= 1) {
+    if ($('#comment-holder').children().length < 1) {
         var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
         $('#comment-holder').append(noCommentDiv);
     }
@@ -107,7 +107,7 @@ function deleteButton(res) {
         // Update comments
         comments(res[0].comments);
         $('.no-comm').remove();
-        if ($('#comment-holder').children().length === 1) {
+        if ($('#comment-holder').children().length < 1) {
             var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
             $('#comment-holder').append(noCommentDiv);
         }
