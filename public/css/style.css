@@ -124,7 +124,7 @@ button {
 
 #next {
     position: absolute;
-    top: 30%;
+    top: 28%;
     right: 12px;
     padding: 1px !important;
 }
@@ -140,7 +140,7 @@ button {
 
 #prev {
     position: absolute;
-    top: 30%;
+    top: 28%;
     left: 12px;
     padding: 1px !important;
 }
