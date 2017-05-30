@@ -6,7 +6,7 @@ Scraping web-application that scrapes most recent headlines from the Wall Street
 - Express
 - Cheerio
 - Handblebars
-- mongoDB, Mongoose
+- Mongoose
 - Bootstrap
 - javascript/jQuery
 - css animations/transitions
