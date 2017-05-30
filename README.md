@@ -1,4 +1,4 @@
-# 18-scrape
+# WSJ Recaps - Scraper
 Scraping web-application that scrapes most recent headlines from the Wall Street Journal Website. Allows end users to post anonymous comments/opinions on each article.
 
 ## Technologies Used
