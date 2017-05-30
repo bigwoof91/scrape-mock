@@ -1,2 +1,2 @@
--- Deleting last document on slider - BUG! == FIXED
--- No comment logic; check <= logic and && == FIXED
+-- Deleting last document on slider - BUG!: public/js/script.js == FIXED
+-- No comment logic; check <= logic and &&: public/js/script.js == FIXED
