@@ -2,8 +2,7 @@
 Scraping application that scrapes most recent headlines from the Wall Street Journal Website
 
 ## Usage
-Download zip or clone repo to your desktop, then:
-run mongoDB in individual terminal/gitbash
+Download zip or clone repo to your desktop, then run mongoDB in individual terminal/gitbash:
 ```
 mongod
 ```
@@ -15,7 +14,7 @@ Then, to start/run:
 ```
 node server
 ```
-or if you have nodemon installed globally
+or if you have nodemon installed globally:
 ```
 nodemon server
 ```
