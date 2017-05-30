@@ -290,8 +290,8 @@ a:hover {
     pointer-events: none;
     position: absolute;
     z-index: 9999;
-    right: 165px;
-    top: -5px;
+    left: 50%;
+    top: -25px;
     opacity: 0;
     -moz-transition: ease-out 300ms opacity 0ms;
     -o-transition: ease-out 300ms opacity 0ms;
