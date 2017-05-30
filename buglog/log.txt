@@ -1,2 +1,2 @@
 -- Deleting last document on slider - BUG! == FIXED
--- No comment logic; check <= logic and && logic - possible bug.
+-- No comment logic; check <= logic and && - possible bug.
