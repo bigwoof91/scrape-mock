@@ -8,7 +8,7 @@ var modalBody = $('.modal-b');
 $(function() {
     $.get(baseURL + '/first', storeFirstItem);
 
-    if ($('#comment-holder').children().length < 1) {
+    if ($('#comment-holder').children().length === 0) {
         var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
         $('#comment-holder').append(noCommentDiv);
     }
@@ -107,7 +107,7 @@ function deleteButton(res) {
         // Update comments
         comments(res[0].comments);
         $('.no-comm').remove();
-        if ($('#comment-holder').children().length < 1) {
+        if ($('#comment-holder').children().length === 0) {
             var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
             $('#comment-holder').append(noCommentDiv);
         }
@@ -149,7 +149,7 @@ function buttons(res) {
         comments(res[0].comments);
 
         $('.no-comm').remove();
-        if ($('#comment-holder').children().length <= 1 && $('#comment-holder').children().children().length === 0) {
+        if ($('#comment-holder').children().length === 0) {
             var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
             $('#comment-holder').append(noCommentDiv);
         }
@@ -240,7 +240,7 @@ $(document).on('click', '.remove', function() {
     $.post(baseURL + "/remove/" + id, { id: removeID }, function(res) {
         // Update comments
         comments(res);
-        if ($('#comment-holder').children().length <= 1) {
+        if ($('#comment-holder').children().length === 0) {
             var noCommentDiv = $('<h4>no comments have been posted on this article</h4>')
             $('#comment-holder').append(noCommentDiv);
         }
