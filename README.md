@@ -9,6 +9,7 @@ Scraping web-application that scrapes most recent headlines from the Wall Street
 - mongoDB, Mongoose
 - Bootstrap
 - javascript/jQuery
+- css animations/transitions
 - svg animations
 
 ## Usage
