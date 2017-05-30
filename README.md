@@ -11,15 +11,15 @@ in another terminal/gitbash, go into the master directory and run:
 ```
 npm install
 ```
-to start
+Then, to start/run:
 ```
 node server
 ```
-or
+or if you have nodemon installed globally
 ```
 nodemon server
 ```
-open in browser: localhost:3001
+Open in browser: localhost:3001
 
 ## Design mockups
 --------------------------------------------------------------
