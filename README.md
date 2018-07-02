@@ -15,7 +15,7 @@ Scraping web-application that scrapes most recent headlines from the Wall Street
 ## Usage
 Download zip or clone repo to your desktop, then run mongoDB in individual terminal/gitbash:
 ```
-mongod
+mongodb
 ```
 in another terminal/gitbash, go into the master directory and run:
 ```
